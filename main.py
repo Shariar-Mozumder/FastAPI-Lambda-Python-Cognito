@@ -40,7 +40,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Add token verification middleware
-app.middleware("http")(verify_token)
+# app.middleware("http")(verify_token)
 
 # Include routers from different controllers
 app.include_router(user_router)

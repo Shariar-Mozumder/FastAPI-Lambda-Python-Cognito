@@ -19,7 +19,7 @@ plugins:
 
 custom:
   pythonRequirements:
-    # dockerizePip: true
+     dockerizePip: true
     layer:
       name: FastAPI-Lambda-Function
       path: .
