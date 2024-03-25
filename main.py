@@ -19,7 +19,7 @@ app = FastAPI(title="FastAPI x AWS Lambda")
 COGNITO_USER_POOL_ID = "us-east-2_L79cAUYQW"
 COGNITO_REGION = "us-east-2"
 
-cognito = boto3.client("cognito-idp", region_name=COGNITO_REGION)
+# cognito = boto3.client("cognito-idp", region_name=COGNITO_REGION)
 
 # Password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -36,7 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Add token verification middleware
-app.middleware("http")(verify_token)
+# app.middleware("http")(verify_token)
 
 class RequestBody(BaseModel):
    ObjBody: dict
