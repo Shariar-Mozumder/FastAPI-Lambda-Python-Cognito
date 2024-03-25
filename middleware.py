@@ -2,7 +2,7 @@ from fastapi import Request, HTTPException
 from authlib.jose import jwt
 
 # AWS Cognito configuration
-COGNITO_REGION = "your-aws-region"
+COGNITO_REGION = "us-east-2"
 
 # Middleware for token verification
 async def verify_token(request: Request,call_next):
