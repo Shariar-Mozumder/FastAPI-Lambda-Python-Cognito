@@ -1,4 +1,4 @@
-service: FastAPI-Lambda-Function-latest
+service: FastAPI-Lambda-Function-latest2
 
 package:
   individually: true
@@ -32,7 +32,7 @@ functions:
     package:
       patterns:
         - 'src/**'
-        - '!requirements.txt'
+        - 'requirements.txt'
         - '!package.json'
         - '!package-lock.json'
         - '!.serverless/**'
