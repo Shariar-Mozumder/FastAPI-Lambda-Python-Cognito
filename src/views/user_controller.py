@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services import user_service
+from ..services import user_service,user_service_1
 
 user_router = APIRouter()
 
@@ -17,34 +17,34 @@ def process_request(request: dict):
 @user_router.post("/createUser/")
 def createUser(request: dict):
     request_obj= request.get("ObjBody")
-    res=user_service.create_user(request_obj)
+    res=user_service_1.create_user(request_obj)
     return res
 
 @user_router.post("/getUser/")
 def getUser(request: dict):
     request_obj= request.get("ObjBody")
-    res=user_service.get_user(request_obj.get("email"))
+    res=user_service_1.get_user(request_obj.get("email"))
     return res
 
 @user_router.get("/getAllUser/")
 def getUser():
-    res=user_service.get_all_users()
+    res=user_service_1.get_all_users()
     return res
 
 @user_router.post("/updateUser/")
 def getUser(request: dict):
     request_obj= request.get("ObjBody")
-    res=user_service.update_user(request_obj)
+    res=user_service_1.update_user(request_obj)
     return res
 
 @user_router.post("/deleteUser/")
 def getUser(request: dict):
     request_obj= request.get("ObjBody")
-    res=user_service.delete_user(request_obj.get("email"))
+    res=user_service_1.delete_user(request_obj.get("email"))
     return res
 
 @user_router.post("/getUserByName/")
 def getUserByName(request: dict):
     request_obj= request.get("ObjBody")
-    res=user_service.get_user_by_name(request_obj.get("full_name"))
+    res=user_service_1.get_user_by_name(request_obj.get("full_name"))
     return res

@@ -1,5 +1,7 @@
 from src.utils.response import api_response
-from src.models.user_model import User
+from src.models.user_model_1 import Entity,User
+from datetime import datetime
+from src.utils import utilities
 def get_details(name,role,age):
     try:
         
@@ -14,24 +16,33 @@ def get_details(name,role,age):
     
 def create_user(userData):
     try:
-        user_id = userData.get('email')  # Assuming email is unique and can be used as user_id
-        full_name = userData.get('full_name')
+        emai_id = userData.get('email')  # Assuming email is unique and can be used as user_id
+        name = userData.get('name')
         email = userData.get('email')
-        age = userData.get('age')
+        description = userData.get('description')
         phone = userData.get('phone')
-        password=userData.get('password')
-        token=userData.get('token')
+        im=userData.get('im')
+        modified_by=userData.get('name')
+        first_name= userData.get('first_name')
+        last_name=userData.get('last_name')
+        cell_phone=userData.get('phone')
         user=User(
-            user_id=user_id,
-            full_name=full_name,
+            id=emai_id,
+            name=name,
             email=email,
-            age=age,
+            description=description,
             phone=phone,
-            password=password,
-            token=token
+            im=im,
+            modified_by=modified_by,
+            modified_date=datetime.now(),
+            registration_date=datetime.now(),
+            status="active",
+            first_name=first_name,
+            last_name=last_name,
+            cell_phone=cell_phone
             )
         user.save()
-        return api_response(200,"User created successfully.",user)
+        return api_response(200,"User created successfully.",utilities.object_to_dict(user))
     except Exception as e:
         return api_response(500,"Server Error: "+str(e))
 
@@ -39,7 +50,7 @@ def get_user(email):
     try:
         user=User.get(email)
         if user:
-            return api_response(200,"User get successfully.",user)
+            return api_response(200,"User get successfully.",utilities.object_to_dict(user))
         else:
             return api_response(200,"User not found.")
     except Exception as e:
@@ -49,7 +60,11 @@ def get_all_users():
     try:
         users = list(User.scan())
         if len(users)>0:
-            return api_response(200,"User get successfully.",users)
+            userlist=[]
+            for user in users:
+                singleUser=utilities.object_to_dict(user)
+                userlist.append(singleUser)
+            return api_response(200,"User get successfully.",userlist)
         else:
             return api_response(200,"User not found.")
     except Exception as e:
@@ -65,7 +80,7 @@ def update_user(userData):
             setattr(user, key, value)
         # Save the changes
         user.save()
-        return api_response(200,"User updated successfully.",user)
+        return api_response(200,"User updated successfully.",utilities.object_to_dict(user))
     except User.DoesNotExist:
         return api_response(200,"User does not exist.")
     
@@ -81,10 +96,14 @@ def get_user_by_name(username):
     try:
         condition=None
         if username:
-            condition &= User.full_name.contains(username)
+            condition &= User.first_name.contains(username)
         items=User.scan(filter_condition=condition)
-        userList=[User(full_name=item.full_name,email=item.email,age=item.age,phone=item.phone) for item in items]
-        return api_response(200, "get Users Successfully.",userList)
+        # userList=[User(full_name=item.full_name,email=item.email,age=item.age,phone=item.phone) for item in items]
+        itemlist=[]
+        for item in items:
+            singleItem=utilities.object_to_dict(item)
+            itemlist.append(singleItem)
+        return api_response(200, "get Users Successfully.",itemlist)
     except Exception as e:
         return api_response(500,"Server Error: "+str(e))
         
