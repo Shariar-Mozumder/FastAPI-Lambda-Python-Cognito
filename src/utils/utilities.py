@@ -8,8 +8,11 @@ def object_to_dict(obj):
     for key, value in values.items():
         if isinstance(value, datetime.datetime):
             values[key] = value.isoformat()
+
+    print("this is a dummy changes, check if there anything worng or not")
     # Remove attributes to ignore
     ignore_attributes = ['cls']  # Add any other attributes to ignore
+    print("ignore_attributes")
     for attr in ignore_attributes:
         values.pop(attr, None)
     return values
