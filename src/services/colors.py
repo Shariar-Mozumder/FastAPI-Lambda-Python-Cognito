@@ -5,6 +5,7 @@ from colorsys import rgb_to_hsv, hsv_to_rgb
 # Helper function to convert HEX to RGB
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
+    print("test")
     return tuple(int(hex_color[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
 
 # Helper function to convert RGB to HEX
