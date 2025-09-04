@@ -46,11 +46,14 @@ app.add_middleware(
 app.include_router(user_router)
 app.include_router(auth_router)
 
+app.include_router(service_router)
+app.include_router(utils_router)
 
 
 # Mangum Handler, this is so important
 handler = Mangum(app)
 
 #  # at last, the bottom of the file/module
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="127.0.0.1", port=5049)
+if __name__ == "__main__":
+    print("this is a test code")
+    uvicorn.run(app, host="127.0.0.1", port=5049)
