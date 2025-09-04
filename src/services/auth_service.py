@@ -29,7 +29,7 @@ def signup(requestData):
                 {"Name": "email", "Value": email}
             ]
         )
-        return api_response(200, "User signed up successfully")
+        return api_response("User signed up","successfully executed",500,200, "User signed up successfully")
     except Exception as e:
         return api_response(500, "Server error: "+str(e))
     
